@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const SearchBar = ({ placeholder = 'Buscar', onQuery }: Props) => {
-    const [query, SetQuery] = useState('');
+    const [query, setQuery] = useState('');
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -20,7 +20,7 @@ export const SearchBar = ({ placeholder = 'Buscar', onQuery }: Props) => {
 
     const handleSearch = () => {
         onQuery(query);
-        SetQuery('');
+        setQuery('');
     };
 
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -35,7 +35,7 @@ export const SearchBar = ({ placeholder = 'Buscar', onQuery }: Props) => {
                 type="text"
                 placeholder={placeholder}
                 value={query}
-                onChange={event => SetQuery(event.target.value)}
+                onChange={event => setQuery(event.target.value)}
                 onKeyDown={handleKeyDown}
             />
             <button onClick={handleSearch}>Buscar</button>

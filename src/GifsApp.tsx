@@ -7,50 +7,47 @@ import { getGifsByQuery } from './gifs/actions/get-gifs-by -query.action';
 import type { Gif } from './gifs/interfaces/gif.interface';
 
 export const GifsApp = () => {
-    const [previousTerms, setPreviousTerms] = useState<string[]>([]);
+  const [previousTerms, setPreviousTerms] = useState<string[]>([]);
 
-    const [gifs, setGifs] = useState<Gif[]>([]);
+  const [gifs, setGifs] = useState<Gif[]>([]);
 
-    const handleTermCLicked = (term: string) => {
-        console.log({ term });
-    };
+  const handleTermCLicked = (term: string) => {
+    console.log({ term });
+  };
 
-    // el handle significa que es un manejador de evento
-    const handleSearch = async (query: string) => {
-        query = query.trim().toLowerCase();
-        if (query.length === 0) return;
+  // el handle significa que es un manejador de evento
+  const handleSearch = async (query: string) => {
+    query = query.trim().toLowerCase();
+    if (query.length === 0) return;
 
-        if (previousTerms.includes(query)) return;
+    if (previousTerms.includes(query)) return;
 
-        setPreviousTerms([query, ...previousTerms].slice(0, 8));
+    setPreviousTerms([query, ...previousTerms].slice(0, 8));
 
-        const gifs = await getGifsByQuery(query);
+    const gifs = await getGifsByQuery(query);
 
-        setGifs(gifs);
-    };
+    setGifs(gifs);
+  };
 
-    return (
-        <>
-            {/* Header */}
-            <CustomHeader
-                title="Buscador de Gifs"
-                description="Descubre y comparte el gif perfecto"
-            />
+  return (
+    <>
+      {/* Header */}
+      <CustomHeader
+        title="Buscador de Gifs"
+        description="Descubre y comparte el gif perfecto"
+      />
 
-            {/* Search */}
-            <SearchBar
-                placeholder="Busca lo que quieras"
-                onQuery={handleSearch}
-            />
+      {/* Search */}
+      <SearchBar placeholder="Busca lo que quieras" onQuery={handleSearch} />
 
-            {/* Búsqueda previas */}
-            <PreviousSearches
-                searches={previousTerms}
-                onLabelClicked={handleTermCLicked}
-            />
+      {/* Búsqueda previas */}
+      <PreviousSearches
+        searches={previousTerms}
+        onLabelClicked={handleTermCLicked}
+      />
 
-            {/* Gifs */}
-            <GifList gifs={gifs} />
-        </>
-    );
+      {/* Gifs */}
+      <GifList gifs={gifs} />
+    </>
+  );
 };
