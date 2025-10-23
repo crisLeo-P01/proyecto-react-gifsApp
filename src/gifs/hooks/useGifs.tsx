@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getGifsByQuery } from '../actions/get-gifs-by -query.action';
+import { getGifsByQuery } from '../actions/get-gifs-by-query.action';
 import type { Gif } from '../interfaces/gif.interface';
 
 export const UseGifs = () => {
